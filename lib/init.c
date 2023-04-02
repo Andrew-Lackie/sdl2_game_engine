@@ -14,12 +14,12 @@ bool Screen_Init(int screenHeight, int screenWidth, int FPS, char *windowTitle) 
 			return false;
 		}
 
-	engine_config.global_data.window = SDL_CreateWindow(INI_DATA(windowTitle), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, INI_DATA(screenWidth), INI_DATA(screenHeight), SDL_WINDOW_SHOWN);
+	GLOBAL_DATA(window) = SDL_CreateWindow(INI_DATA(windowTitle), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, INI_DATA(screenWidth), INI_DATA(screenHeight), SDL_WINDOW_SHOWN);
 	if (!GLOBAL_DATA(window)) {
 		return false;
 	}
 
-	engine_config.global_data.renderer = SDL_CreateRenderer(GLOBAL_DATA(window), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	GLOBAL_DATA(renderer) = SDL_CreateRenderer(GLOBAL_DATA(window), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	return true;
 }

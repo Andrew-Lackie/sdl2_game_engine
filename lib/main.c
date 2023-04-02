@@ -1,5 +1,5 @@
 #include "../include/sprites/sprite_definition.h"
-#include "../include/window.h"
+#include "../include/window/window.h"
 
 int main() {
 
