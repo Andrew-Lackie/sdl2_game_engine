@@ -1,0 +1,6 @@
+#include "pacman/pacman.h"
+#include "ghosts/blinky.h"
+#include "ghosts/pinky.h"
+#include "ghosts/inky.h"
+#include "ghosts/clyde.h"
+#include "ghosts/ghosts.h"
