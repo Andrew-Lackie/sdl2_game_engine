@@ -1,7 +1,7 @@
 #ifndef GHOSTS_H
 #define GHOSTS_H
 
-#include "../../sprites/sprite_definition.h"
+#include "../../sdl2_game_engine/sprites/sprite_definition.h"
 
 const int GHOST_SPRITE_WIDTH = 1530;
 const int GHOST_SPRITE_HEIGHT = 210;

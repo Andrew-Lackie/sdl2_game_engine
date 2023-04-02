@@ -1,4 +1,4 @@
-#include "../include/sprites/sprite_definition.h"
+#include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 
 int Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, int hitbox_yoff, int hitbox_xoff, int hitbox_width, int hitbox_height, const char *url) {
 
@@ -8,6 +8,7 @@ int Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, int
 
 	if (!sprite_definitions[definition_count].image) return -1;
 
+	sprite_definitions[definition_count].texture = SDL_CreateTextureFromSurface(GLOBAL_DATA(renderer), sprite_definitions[definition_count].image);
 	sprite_definitions[definition_count].sprite_animation = sprite_animation;
 	sprite_definitions[definition_count].dimensions.w = width;
 	sprite_definitions[definition_count].dimensions.h = height;
@@ -51,7 +52,6 @@ void Sprite_Draw_Instances() {
 	for (int i = 0; i < MAX_SPRITES; i++) {
 		if (sprite_instances[i].is_active == SDL_TRUE) {
 
-			sprite_instances[i].definition->texture = SDL_CreateTextureFromSurface(GLOBAL_DATA(renderer), sprite_instances[i].definition->image);
 			sprite_instances[i].srcrect.x = sprite_instances[i].action * sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].definition->dimensions.w;
 			sprite_instances[i].srcrect.y = 0;
 			sprite_instances[i].srcrect.w = sprite_instances[i].definition->dimensions.w;

@@ -1,5 +1,5 @@
-#include "../include/sprites/sprite_definition.h"
-#include "../include/window/window.h"
+#include "../include/sdl2_game_engine/sprites/sprite_definition.h"
+#include "../include/sdl2_game_engine/window/window.h"
 
 int main() {
 

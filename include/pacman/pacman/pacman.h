@@ -1,7 +1,7 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
-#include "../../sprites/sprite_definition.h"
+#include "../../sdl2_game_engine/sprites/sprite_definition.h"
 
 const int PACMAN_SPRITE_WIDTH = 710;
 const int PACMAN_SPRITE_HEIGHT = 197;

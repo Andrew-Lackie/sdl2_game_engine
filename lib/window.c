@@ -1,4 +1,4 @@
-#include "../include/window/window.h"
+#include "../include/sdl2_game_engine/window/window.h"
 #include "../include/pacman/pacman_init.h"
 #include "../include/pacman/pacman_sprites.h"
 

@@ -1,4 +1,4 @@
-#include "../sprites/sprite_definition.h"
+#include "../sdl2_game_engine/sprites/sprite_definition.h"
 
 const int SCREEN_HEIGHT = 1440;
 const int SCREEN_WIDTH = 2560;

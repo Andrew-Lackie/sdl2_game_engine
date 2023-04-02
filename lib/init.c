@@ -1,5 +1,5 @@
-#include "../include/core/engine_config.h"
-#include "../include/sprites/sprite_definition.h"
+#include "../include/sdl2_game_engine/core/engine_config.h"
+#include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 
 bool Screen_Init(int screenHeight, int screenWidth, int FPS, char *windowTitle) {
 	INI_DATA(screenHeight) = screenHeight;
