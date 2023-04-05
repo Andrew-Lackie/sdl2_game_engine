@@ -15,22 +15,21 @@ int main() {
 	bool quit = false;
 	SDL_Event event;
 
-	Uint32 lastTick = SDL_GetTicks();
-
 	while(!quit) {
 		while(SDL_PollEvent(&event)) {
 			switch (event.type) {
 				case SDL_QUIT:
 					quit = true;
 					break;
+				case SDL_KEYDOWN:
+					break;
+				case SDL_KEYUP:
+					GLOBAL_DATA(keyboardState) = NULL;
+					break;
 			}
 		}
 
-		Uint32 curTick = SDL_GetTicks();
-		Uint32 diff = curTick - lastTick;
-		engine_config.global_data.runTime = diff / 1000.0f;
 		Update();
-		lastTick = curTick;
 
 	}
 

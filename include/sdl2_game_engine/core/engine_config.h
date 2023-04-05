@@ -13,7 +13,7 @@ typedef struct {
 	struct {
 		int screenWidth;
 		int	screenHeight;
-		int FPS;
+		Uint8 FPS;
 		char *windowTitle;
 	} ini;
 
@@ -21,7 +21,10 @@ typedef struct {
 		SDL_Renderer *renderer;
 		SDL_Window *window;
 		SDL_Texture *currentImage;
-		float runTime;
+		const Uint8 *keyboardState;
+		Uint8 lastTick;
+		Uint8 curTick;
+		float elapsed;
 		struct {
 			int x;
 			int y;
@@ -30,7 +33,6 @@ typedef struct {
 	} global_data;
 
 } Engine_Config;
-
 
 extern Engine_Config engine_config;
 

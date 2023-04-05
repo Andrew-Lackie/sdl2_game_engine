@@ -27,19 +27,22 @@ void Sprites_Init() {
 	}
 }
 
-int Sprite_Create_Instance(int sprite_definition, int action, int x, int y) {
+int Sprite_Create_Instance(int sprite_definition, int animation, int x, int y, float xSpeed, float ySpeed) {
 
 	if (instance_count > MAX_SPRITES) return -1;
 
 	if (sprite_instances[instance_count].is_active == SDL_FALSE) {
 		sprite_instances[instance_count].is_active = SDL_TRUE;
 		sprite_instances[instance_count].is_visible = SDL_TRUE;
-		sprite_instances[instance_count].action = action;
+		sprite_instances[instance_count].animation = animation;
+		sprite_instances[instance_count].dir = SDL_NONE;
 		sprite_instances[instance_count].definition = &sprite_definitions[sprite_definition];
 		sprite_instances[instance_count].position.x = x;
 		sprite_instances[instance_count].position.y = y;
 		sprite_instances[instance_count].position.w = sprite_definitions[sprite_definition].dimensions.w * sprite_definitions[sprite_definition].sprite_animation->scale;
 		sprite_instances[instance_count].position.h = sprite_definitions[sprite_definition].dimensions.h * sprite_definitions[sprite_definition].sprite_animation->scale;
+		sprite_instances[instance_count].xSpeed = xSpeed;
+		sprite_instances[instance_count].ySpeed = ySpeed;
 
 		return instance_count++;
 	}
@@ -52,7 +55,7 @@ void Sprite_Draw_Instances() {
 	for (int i = 0; i < MAX_SPRITES; i++) {
 		if (sprite_instances[i].is_active == SDL_TRUE) {
 
-			sprite_instances[i].srcrect.x = sprite_instances[i].action * sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].definition->dimensions.w;
+			sprite_instances[i].srcrect.x = sprite_instances[i].animation * sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].definition->dimensions.w;
 			sprite_instances[i].srcrect.y = 0;
 			sprite_instances[i].srcrect.w = sprite_instances[i].definition->dimensions.w;
 			sprite_instances[i].srcrect.h = sprite_instances[i].definition->dimensions.h;
@@ -63,16 +66,12 @@ void Sprite_Draw_Instances() {
 
 void Sprite_Update_Instances() {
 	for (int i = 0; i < instance_count; i++) {
-		Uint32 time = GLOBAL_DATA(runTime) / (sprite_instances[i].definition->sprite_animation->frequency);
+		Uint32 time = GLOBAL_DATA(curTick) / (sprite_instances[i].definition->sprite_animation->frequency);
 		Uint32 count = time % (sprite_instances[i].definition->sprite_animation->frames);
-		sprite_instances[i].srcrect.x = count * sprite_instances[i].definition->dimensions.w + (sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].action * sprite_instances[i].definition->dimensions.w);
+		sprite_instances[i].srcrect.x = count * sprite_instances[i].definition->dimensions.w + (sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].animation * sprite_instances[i].definition->dimensions.w);
 
 		SDL_RenderCopy(GLOBAL_DATA(renderer), sprite_instances[i].definition->texture, &(sprite_instances[i].srcrect), &(sprite_instances[i].position));
 	}
-}
-
-void Sprite_Update_Animation(int instance, int anim) {
-	sprite_instances[instance].definition->sprite_animation->frames = anim;
 }
 
 void Sprite_Destroy() {

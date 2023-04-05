@@ -25,14 +25,6 @@ typedef enum GhostDir {
 	right = 0, down = 1, up = 2, left = 3
 } GhostDir;
 
-typedef struct {
-	int blinky;
-	int pinky;
-	int inky;
-	int clyde;
-} Ghosts;
-
-Ghosts ghosts;
 const GhostDir GHOST_INITIAL_DIR = down;
 
 #endif
