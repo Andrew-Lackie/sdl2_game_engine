@@ -21,10 +21,4 @@ Sprite_Animation ghost = {
 	.frequency = GHOST_ANIMATION_FREQUENCY,
 };
 
-typedef enum GhostDir {
-	right = 0, down = 1, up = 2, left = 3
-} GhostDir;
-
-const GhostDir GHOST_INITIAL_DIR = down;
-
 #endif
