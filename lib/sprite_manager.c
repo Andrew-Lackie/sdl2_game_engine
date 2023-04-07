@@ -1,52 +1,31 @@
-#include "../include/sdl2_game_engine/sprites/sprite_movement.h"
+#include "../include/sdl2_game_engine/sprites/sprite_action.h"
 
-SDL_Dir Player_Dir(Player *player, bool stop) {
+Player *Create_Player(Player *player, Sprite_Instance *sprite, int actions_count) {
 
-	SDL_Dir dir;
+    player = malloc(sizeof(*player) + sizeof(short) + sizeof(Action) * actions_count);
 
-	if(GLOBAL_DATA(keyboardState)[player->up]) {
-		dir = SDL_UP;
-	}
+    player->struct_size = (sizeof(*player) + sizeof(short) + sizeof(Action) * actions_count);
+    player->actions_count = actions_count;
+    player->sprite = sprite;
 
-	else if(GLOBAL_DATA(keyboardState)[player->down]) {
-		dir = SDL_DOWN;
-	}
+    players[player_count] = player;
 
-	else if(GLOBAL_DATA(keyboardState)[player->left]) {
-		dir = SDL_LEFT;
-	}
+    player_count++;
 
-	else if(GLOBAL_DATA(keyboardState)[player->right]) {
-		dir = SDL_RIGHT;
-	}
-
-	else {
-		dir = player->sprite->dir ;
-		if(stop) {
-			dir = SDL_NONE;
-		}
-	}
-
-	player->sprite->dir = dir;
-
-	return dir;
+    return player;
 }
 
-SDL_Dir Sprite_Move(Sprite_Instance *sprite) {
+void Action_Define(int player_index, SDL_Scancode key, int anim, int action, Operation opt) {
+    players[player_index]->actions[action].key = key;
+    players[player_index]->actions[action].anim = anim;
+    players[player_index]->actions[action].func = opt;
+}
 
-
-	if(sprite->dir == SDL_UP) {
-		sprite->position.y -= sprite->ySpeed;
-	}
-	else if(sprite->dir == SDL_DOWN) {
-		sprite->position.y += sprite->ySpeed;
-	}
-	else if(sprite->dir == SDL_LEFT) {
-		sprite->position.x -= sprite->xSpeed;
-	}
-	else if(sprite->dir == SDL_RIGHT) {
-		sprite->position.x += sprite->xSpeed;
-	}
-
-	return sprite->dir;
+void Enable_Actions(int player_index) {
+    for (int i = 0; i < players[player_index]->actions_count; i++) {
+        if (GLOBAL_DATA(keyboardState)[players[player_index]->actions[i].key]) {
+            players[player_index]->sprite->animation = players[player_index]->actions[i].anim;
+            players[player_index]->actions[i].func(players[player_index]->sprite);
+        }
+    }
 }

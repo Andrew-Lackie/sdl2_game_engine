@@ -1,6 +1,8 @@
 #include "../include/sdl2_game_engine/window/window.h"
 #include "../include/pacman/pacman_init.h"
-#include "../include/pacman/pacman_sprites.h"
+#include "../include/pacman/pacman/pacman.h"
+#include "../include/pacman/pacman_action.h"
+
 #include <unistd.h>
 
 bool Initialize() {
@@ -14,7 +16,6 @@ bool Initialize() {
 	/* ------------------------------------ */
 	/* Initialize and Render the Characters */
 	/* ------------------------------------ */
-
 
 	characters.blinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, BLINKY_SPRITE);
 	characters.pinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, PINKY_SPRITE);
@@ -32,9 +33,14 @@ bool Initialize() {
 
 	int pacman_instance = Sprite_Create_Instance(characters.pacman_definition, 0, GLOBAL_DATA(screenCenter).x, GLOBAL_DATA(screenCenter).y, PACMAN_SPEED, PACMAN_SPEED);
 
-	pacman_player.sprite = &sprite_instances[pacman_instance];
-
 	Sprite_Draw_Instances();
+
+	Create_Player(&player, &sprite_instances[pacman_instance], 4);
+
+	Action_Define(0, SDL_SCANCODE_UP, MOVE_UP, UP, Move_Up);
+	Action_Define(0, SDL_SCANCODE_DOWN, MOVE_DOWN, DOWN, Move_Down);
+	Action_Define(0, SDL_SCANCODE_LEFT, MOVE_LEFT, LEFT, Move_Left);
+	Action_Define(0, SDL_SCANCODE_RIGHT, MOVE_RIGHT, RIGHT, Move_Right);
 
 	return true;
 }
@@ -52,8 +58,7 @@ void Update() {
 	/* 		Update Sprites 		*/
 	/* -------------------- */
 
- 	Player_Dir(&pacman_player, false);
-	Sprite_Move(pacman_player.sprite);
+	Enable_Actions(0);
 
 	Sprite_Update_Instances();
 
@@ -66,8 +71,6 @@ void Update() {
 	else {
 		sleep((GLOBAL_DATA(elapsed)) - 1 / (INI_DATA(FPS)));
 	}
-
-
 }
 
 void Shutdown(void) {
@@ -77,6 +80,10 @@ void Shutdown(void) {
 
 	if (GLOBAL_DATA(window)) {
 		SDL_DestroyWindow(GLOBAL_DATA(window));
+	}
+
+	for (int i = 0; i < MAX_PLAYERS; i++) {
+		free(players[i]);
 	}
 
 	SDL_Quit();

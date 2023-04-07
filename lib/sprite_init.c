@@ -27,15 +27,15 @@ void Sprites_Init() {
 	}
 }
 
-int Sprite_Create_Instance(int sprite_definition, int animation, int x, int y, float xSpeed, float ySpeed) {
+int Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, int y, float xSpeed, float ySpeed) {
 
 	if (instance_count > MAX_SPRITES) return -1;
 
 	if (sprite_instances[instance_count].is_active == SDL_FALSE) {
 		sprite_instances[instance_count].is_active = SDL_TRUE;
 		sprite_instances[instance_count].is_visible = SDL_TRUE;
-		sprite_instances[instance_count].animation = animation;
-		sprite_instances[instance_count].dir = SDL_NONE;
+		sprite_instances[instance_count].animation = initial_anim;
+		sprite_instances[instance_count].action = 0;
 		sprite_instances[instance_count].definition = &sprite_definitions[sprite_definition];
 		sprite_instances[instance_count].position.x = x;
 		sprite_instances[instance_count].position.y = y;
