@@ -16,10 +16,6 @@
 #define LEFT 2
 #define RIGHT 3
 
-/*const int SCREEN_HEIGHT = 1440;*/
-/*const int SCREEN_WIDTH = 2560;*/
-/*const int FPS = 60;*/
-/*char *WINDOW_TITLE = "Pacman";*/
 int player_count = 0;
 
 typedef struct {
