@@ -2,11 +2,11 @@
 #include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 #include "../include/sdl2_game_engine/utils/config_parser.h"
 
-int Screen_Init(/*int screenHeight, int screenWidth, int FPS, char *windowTitle, */char *config_fPath) {
+int Screen_Init(char *path) {
 
 	config_p data;
 
-	if((data = Read_Config_File(config_fPath)) == NULL) {
+	if((data = Read_Config_File(path)) == NULL) {
 		perror("read_config_file()");
     return -1;
 	}

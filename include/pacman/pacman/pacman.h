@@ -13,7 +13,7 @@ const int PACMAN_FRAMES = 3;
 const int PACMAN_ANIMATION_FREQUENCY = 100;
 const float PACMAN_WIDTH = PACMAN_SPRITE_WIDTH / (PACMAN_ANIMATIONS * PACMAN_FRAMES);
 const float PACMAN_SCALE = 0.4;
-const char PACMAN_SPRITE[] = "../assets/pacman.png";
+const char PACMAN_SPRITE[] = "../assets/pacman/pacman.png";
 
 Sprite_Animation pacman_anim = {
 	.instanceCount = PACMAN_ANIMATIONS,

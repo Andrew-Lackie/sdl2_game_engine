@@ -36,7 +36,7 @@ typedef struct {
 
 extern Engine_Config engine_config;
 
-int Screen_Init(/*int, int, int, char *, */char *);
+int Screen_Init(char *);
 
 #define GLOBAL_DATA(x) engine_config.global_data.x
 #define INI_DATA(x) engine_config.ini.x
