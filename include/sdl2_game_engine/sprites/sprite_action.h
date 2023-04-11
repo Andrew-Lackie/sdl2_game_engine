@@ -22,7 +22,7 @@ typedef struct {
 
 extern Player *players[MAX_PLAYERS];
 
-Player *Create_Player(Player *, Sprite_Instance *, int);
+Player *Create_Player(Player *player, Sprite_Instance *, int);
 void Action_Define(int, SDL_Scancode, int, int, Operation);
 void Enable_Actions(int);
 

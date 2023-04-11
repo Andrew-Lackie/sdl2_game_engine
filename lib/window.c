@@ -7,7 +7,7 @@
 
 bool Initialize() {
 
-	if(!Screen_Init(SCREEN_HEIGHT, SCREEN_WIDTH, FPS, WINDOW_TITLE)) {
+	if(!Screen_Init("../pacman.conf")) {
 		return false;
 	}
 
@@ -85,6 +85,8 @@ void Shutdown(void) {
 	for (int i = 0; i < MAX_PLAYERS; i++) {
 		free(players[i]);
 	}
+
+	/*free(title_definitions);*/
 
 	SDL_Quit();
 }

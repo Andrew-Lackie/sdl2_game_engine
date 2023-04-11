@@ -3,10 +3,8 @@
 
 int main() {
 
-
 	srand((unsigned int)time(NULL));
 	atexit(Shutdown);
-
 
 	if (!Initialize()) {
 		exit(1);

@@ -16,10 +16,10 @@
 #define LEFT 2
 #define RIGHT 3
 
-const int SCREEN_HEIGHT = 1440;
-const int SCREEN_WIDTH = 2560;
-const int FPS = 60;
-char *WINDOW_TITLE = "Pacman";
+/*const int SCREEN_HEIGHT = 1440;*/
+/*const int SCREEN_WIDTH = 2560;*/
+/*const int FPS = 60;*/
+/*char *WINDOW_TITLE = "Pacman";*/
 int player_count = 0;
 
 typedef struct {
@@ -36,8 +36,8 @@ Player *players[MAX_PLAYERS];
 
 Player player;
 
-int definition_count;
-int instance_count;
+size_t definition_count;
+size_t instance_count;
 
 Engine_Config engine_config;
 

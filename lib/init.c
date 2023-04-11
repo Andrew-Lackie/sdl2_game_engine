@@ -1,13 +1,45 @@
 #include "../include/sdl2_game_engine/core/engine_config.h"
 #include "../include/sdl2_game_engine/sprites/sprite_definition.h"
+#include "../include/sdl2_game_engine/utils/config_parser.h"
 
-bool Screen_Init(int screenHeight, int screenWidth, int FPS, char *windowTitle) {
-	INI_DATA(screenHeight) = screenHeight;
-	INI_DATA(screenWidth) = screenWidth;
-	INI_DATA(FPS) = FPS;
-	INI_DATA(windowTitle) = windowTitle;
-	GLOBAL_DATA(screenCenter).x = screenWidth / 2;
-	GLOBAL_DATA(screenCenter).y = screenHeight / 2;
+int Screen_Init(/*int screenHeight, int screenWidth, int FPS, char *windowTitle, */char *config_fPath) {
+
+	config_p data;
+
+	if((data = Read_Config_File(config_fPath)) == NULL) {
+		perror("read_config_file()");
+    return -1;
+	}
+
+	while(1) {
+		if(strcmp(data->key, "screen_width") == 0) {
+			INI_DATA(screenWidth) = atoi(data->value);
+			GLOBAL_DATA(screenCenter).x = atoi(data->value) / 2;
+			printf("screen_width: %s\n", data->value);
+		}
+
+		else if(strcmp(data->key, "screen_height") == 0) {
+			INI_DATA(screenHeight) = atoi(data->value);
+			GLOBAL_DATA(screenCenter).y = atoi(data->value) / 2;
+			printf("screen_height: %s\n", data->value);
+		}
+
+		else if(strcmp(data->key, "fps") == 0) {
+			INI_DATA(FPS) = atoi(data->value);
+			printf("fps: %s\n", data->value);
+		}
+
+		else if(strcmp(data->key, "window_title") == 0) {
+			INI_DATA(windowTitle) = data->value;
+			printf("window_title: %s\n", data->value);
+		}
+
+		if (data->prev != NULL) {
+				data = data->prev;
+		} else {
+				break;
+		}
+	}
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 			fprintf(stderr, "Failed to initialize SDL: %s\n", SDL_GetError());

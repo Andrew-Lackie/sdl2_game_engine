@@ -5,8 +5,8 @@
 
 #define MAX_SPRITES 50
 
-extern int definition_count;
-extern int instance_count;
+extern size_t definition_count;
+extern size_t instance_count;
 
 typedef struct {
 	int instanceCount;
@@ -38,9 +38,9 @@ typedef struct {
 extern Sprite_Definition sprite_definitions[MAX_SPRITES];
 extern Sprite_Instance sprite_instances[MAX_SPRITES];
 
-int Sprite_Define(Sprite_Animation *, int, int, int, int, int, int, const char*);
+size_t Sprite_Define(Sprite_Animation *, int, int, int, int, int, int, const char*);
 void Sprites_Init();
-int Sprite_Create_Instance(int, int, int, int, float, float);
+size_t Sprite_Create_Instance(int, int, int, int, float, float);
 void Sprite_Draw_Instances();
 void Sprite_Update_Instances();
 void Sprite_Update_Animation(Sprite_Instance *, int);

@@ -1,6 +1,6 @@
 #include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 
-int Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, int hitbox_yoff, int hitbox_xoff, int hitbox_width, int hitbox_height, const char *url) {
+size_t Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, int hitbox_yoff, int hitbox_xoff, int hitbox_width, int hitbox_height, const char *url) {
 
 	if(definition_count > MAX_SPRITES) return -1;
 
@@ -27,7 +27,7 @@ void Sprites_Init() {
 	}
 }
 
-int Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, int y, float xSpeed, float ySpeed) {
+size_t Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, int y, float xSpeed, float ySpeed) {
 
 	if (instance_count > MAX_SPRITES) return -1;
 
@@ -65,7 +65,7 @@ void Sprite_Draw_Instances() {
 }
 
 void Sprite_Update_Instances() {
-	for (int i = 0; i < instance_count; i++) {
+	for (size_t i = 0; i < instance_count; i++) {
 		Uint32 time = GLOBAL_DATA(curTick) / (sprite_instances[i].definition->sprite_animation->frequency);
 		Uint32 count = time % (sprite_instances[i].definition->sprite_animation->frames);
 		sprite_instances[i].srcrect.x = count * sprite_instances[i].definition->dimensions.w + (sprite_instances[i].definition->sprite_animation->frames * sprite_instances[i].animation * sprite_instances[i].definition->dimensions.w);
@@ -75,7 +75,7 @@ void Sprite_Update_Instances() {
 }
 
 void Sprite_Destroy() {
-	for (int i = 0; i < definition_count; i++) {
+	for (size_t i = 0; i < definition_count; i++) {
 		SDL_FreeSurface(sprite_instances[i].definition->image);
 		SDL_DestroyTexture(sprite_instances[i].definition->texture);
 	}
