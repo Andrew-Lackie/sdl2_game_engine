@@ -13,6 +13,16 @@ bool Initialize() {
 
 	GLOBAL_DATA(lastTick) = SDL_GetTicks();
 
+	/* ----------------------------- */
+	/* Initialize and Render the Map */
+	/* ----------------------------- */
+
+	Init_Tile_Def(48);
+
+	Create_Img_Texture(map_img_path, BMP);
+
+	Init_Img_Tiles(end_pixel_x, end_pixel_y, margin_pixels, init_pixel_x, init_pixel_y, tile_width, tile_height);
+
 	/* ------------------------------------ */
 	/* Initialize and Render the Characters */
 	/* ------------------------------------ */
@@ -42,6 +52,7 @@ bool Initialize() {
 	Action_Define(0, SDL_SCANCODE_LEFT, MOVE_LEFT, LEFT, Move_Left);
 	Action_Define(0, SDL_SCANCODE_RIGHT, MOVE_RIGHT, RIGHT, Move_Right);
 
+
 	return true;
 }
 
@@ -53,6 +64,12 @@ void Update() {
 	GLOBAL_DATA(curTick) = SDL_GetTicks();
 	float diff = GLOBAL_DATA(curTick) - GLOBAL_DATA(lastTick);
  	GLOBAL_DATA(elapsed) = diff / 1000.f;
+
+	/* ---------------- */
+	/* 		Update Map 		*/
+	/* ---------------- */
+
+	Render_Tilemap(map_temp_path);
 
 	/* -------------------- */
 	/* 		Update Sprites 		*/
@@ -86,7 +103,7 @@ void Shutdown(void) {
 		free(players[i]);
 	}
 
-	/*free(title_definitions);*/
+	free(tile_definitions);
 
 	SDL_Quit();
 }

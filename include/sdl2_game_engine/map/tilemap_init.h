@@ -3,19 +3,25 @@
 
 #include "../core/engine_config.h"
 #include "../sprites/sprite_definition.h"
+#include "../utils/map_parser.h"
+
+#define BMP 0
+#define JPG 1
+#define PNG 2
 
 typedef enum {
- BLANK_TILE = 0,
- IMG_TILE = 1,
- SPRITE_TILE = 2,
+	BLANK_TILE = 0,
+	IMG_TILE = 1,
+	SPRITE_TILE = 2,
 } Tiles;
 
-size_t tile_def_count;
+extern size_t tile_def_count;
 
 typedef struct {
 	SDL_Rect dimensions;
 	SDL_Rect hitbox;
 	SDL_Color color;
+	bool collision_detection;
 } Blank_Tile;
 
 typedef struct {
@@ -24,12 +30,14 @@ typedef struct {
 	SDL_Surface *image;
 	SDL_Texture *texture;
 	SDL_Rect srcrect;
+	bool collision_detection;
 } Img_Tile;
 
 typedef struct {
 	Sprite_Definition *sprite;
 	SDL_Rect srcrect;
 	int animation;
+	bool collision_detection;
 } Sprite_Tile;
 
 typedef union {
@@ -41,26 +49,24 @@ typedef union {
 typedef struct {
 	Tile_Union tile;
 	Tiles type;
+	bool collision_detection;
 } Tile_Type;
 
-typedef struct {
-	Tile_Type tile_type;
-	bool collision_detection;
-} Tile;
+extern Tile_Type *tile_definitions;
 
-Tile_Type *tile_definitions;
-size_t total_tile_def;
+extern size_t total_tile_def;
+extern size_t total_tiles;
 
-/*extern Tile *tiles;*/
-size_t total_tiles;
-
-int **tile_map_outline;
-SDL_Rect **tile_map;
+extern SDL_Texture *tile_map_texture;
 
 void Init_Tile_Def(size_t);
-size_t Blank_Tile_Def(int, int, int, int, SDL_Color);
-size_t Img_Tile_Def(int, int, int, int, int, int, char *);
-size_t Sprite_Tile_Def(Sprite_Definition *, int);
-void Render_Tilemap(char *, int, int);
+size_t Blank_Tile_Def(SDL_Color, bool);
+void Create_Img_Texture(char *, int);
+size_t Img_Tile_Def(int, int, int, int, bool);
+size_t Init_Img_Tiles(int, int, int, int, int, int, int);
+int **Init_Map_Template(char *);
+SDL_Rect **Init_Tilemap();
+size_t Sprite_Tile_Def(Sprite_Definition *, int, bool);
+void Render_Tilemap(char *);
 
 #endif

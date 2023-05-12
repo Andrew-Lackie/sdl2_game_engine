@@ -1,5 +1,6 @@
 #include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 #include "../include/sdl2_game_engine/window/window.h"
+#include "../include/sdl2_game_engine/utils/map_parser.h"
 
 int main() {
 
@@ -33,8 +34,8 @@ int main() {
 
 	Sprite_Destroy();
 
-	SDL_DestroyRenderer(engine_config.global_data.renderer);
-	SDL_DestroyWindow(engine_config.global_data.window);
+	SDL_DestroyRenderer(GLOBAL_DATA(renderer));
+	SDL_DestroyWindow(GLOBAL_DATA(window));
 	IMG_Quit();
 	SDL_Quit();
 }

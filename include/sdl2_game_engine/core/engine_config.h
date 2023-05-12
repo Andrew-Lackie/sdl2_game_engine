@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <errno.h>
 #include <time.h>
 #include <math.h>
 #include <SDL2/SDL.h>
@@ -15,6 +16,8 @@ typedef struct {
 		int	screenHeight;
 		Uint8 FPS;
 		char *windowTitle;
+		int tilesX;
+		int tilesY;
 	} ini;
 
 	struct {

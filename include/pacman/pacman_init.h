@@ -1,4 +1,8 @@
+#ifndef PACMAN_INIT_H
+#define PACMAN_INIT_H
+
 #include "../sdl2_game_engine/sprites/sprite_action.h"
+#include "maps/maps.h"
 #include "ghosts/blinky.h"
 #include "ghosts/pinky.h"
 #include "ghosts/inky.h"
@@ -32,6 +36,14 @@ Player *players[MAX_PLAYERS];
 
 Player player;
 
+Tile_Type *tile_definitions;
+
+size_t total_tiles;
+size_t total_tile_def;
+size_t tile_def_count;
+
+SDL_Rect **tile_map;
+
 size_t definition_count;
 size_t instance_count;
 
@@ -39,3 +51,7 @@ Engine_Config engine_config;
 
 Sprite_Definition sprite_definitions[MAX_SPRITES];
 Sprite_Instance sprite_instances[MAX_SPRITES];
+
+SDL_Texture *tile_map_texture;
+
+#endif

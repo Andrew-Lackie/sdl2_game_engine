@@ -34,6 +34,16 @@ int Screen_Init(char *path) {
 			printf("window_title: %s\n", data->value);
 		}
 
+		else if(strcmp(data->key, "tiles_x") == 0) {
+			INI_DATA(tilesX) = atoi(data->value);
+			printf("tiles_x: %s\n", data->value);
+		}
+
+		else if(strcmp(data->key, "tiles_y") == 0) {
+			INI_DATA(tilesY) = atoi(data->value);
+			printf("tiles_y: %s\n", data->value);
+		}
+
 		if (data->prev != NULL) {
 				data = data->prev;
 		} else {

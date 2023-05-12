@@ -19,6 +19,6 @@ struct config_data {
 	char value[CONFIG_VALUE_MAX_BYTES];
 };
 
-config_p Read_Config_File(char*);
+config_p Read_Config_File(char *);
 
 #endif
