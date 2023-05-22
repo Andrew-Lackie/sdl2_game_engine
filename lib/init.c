@@ -44,6 +44,11 @@ int Screen_Init(char *path) {
 			printf("tiles_y: %s\n", data->value);
 		}
 
+		else if(strcmp(data->key, "tile_size") == 0) {
+			INI_DATA(tile_size) = atoi(data->value);
+			printf("tile_size: %s\n", data->value);
+		}
+
 		if (data->prev != NULL) {
 				data = data->prev;
 		} else {

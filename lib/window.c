@@ -21,7 +21,7 @@ bool Initialize() {
 
 	Create_Img_Texture(map_img_path, BMP);
 
-	Init_Img_Tiles(end_pixel_x, end_pixel_y, margin_pixels, init_pixel_x, init_pixel_y, tile_width, tile_height);
+	Init_Img_Tiles(end_pixel_x, end_pixel_y, margin_pixels, init_pixel_x, init_pixel_y);
 
 	/* ------------------------------------ */
 	/* Initialize and Render the Characters */

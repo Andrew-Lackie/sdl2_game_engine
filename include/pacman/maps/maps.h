@@ -11,9 +11,6 @@ int tiles_x = 16;
 
 int margin_pixels = 1;
 
-int tile_width = 8;
-int tile_height = 8;
-
 int init_pixel_x = 225;
 int init_pixel_y = 27;
 

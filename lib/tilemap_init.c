@@ -56,12 +56,11 @@ size_t Img_Tile_Def(int src_x_init, int src_y_init, int img_width, int img_heigh
 	return tile_def_count++;
 }
 
-size_t Init_Img_Tiles(int end_pixel_x, int end_pixel_y, int margin_pixels, int init_pixel_x, int init_pixel_y, int tile_width, int tile_height) {
+size_t Init_Img_Tiles(int end_pixel_x, int end_pixel_y, int margin_pixels, int init_pixel_x, int init_pixel_y) {
 
-	for (int y = init_pixel_y; y < end_pixel_y; y = y + tile_height + margin_pixels) {
-		for (int x = init_pixel_x; x < end_pixel_x; x = x + tile_width + margin_pixels) {
-			printf("X = %d\t Y = %d\n", x, y);
-			Img_Tile_Def(x, y, tile_width, tile_height, true);
+	for (int y = init_pixel_y; y < end_pixel_y; y = y + INI_DATA(tile_size) + margin_pixels) {
+		for (int x = init_pixel_x; x < end_pixel_x; x = x + INI_DATA(tile_size) + margin_pixels) {
+			Img_Tile_Def(x, y, INI_DATA(tile_size), INI_DATA(tile_size), true);
 		}
 	}
 	return tile_def_count;
