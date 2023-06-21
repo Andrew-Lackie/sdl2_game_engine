@@ -56,16 +56,6 @@ size_t Img_Tile_Def(int src_x_init, int src_y_init, int img_width, int img_heigh
 	return tile_def_count++;
 }
 
-size_t Init_Img_Tiles(int end_pixel_x, int end_pixel_y, int margin_pixels, int init_pixel_x, int init_pixel_y) {
-
-	for (int y = init_pixel_y; y < end_pixel_y; y = y + INI_DATA(tile_size) + margin_pixels) {
-		for (int x = init_pixel_x; x < end_pixel_x; x = x + INI_DATA(tile_size) + margin_pixels) {
-			Img_Tile_Def(x, y, INI_DATA(tile_size), INI_DATA(tile_size), true);
-		}
-	}
-	return tile_def_count;
-}
-
 size_t Sprite_Tile_Def(Sprite_Definition *sprite, int animation, bool collision_detection) {
 	tile_definitions[tile_def_count].tile.sprite.sprite = sprite;
 	tile_definitions[tile_def_count].tile.sprite.animation = animation;

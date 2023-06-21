@@ -21,27 +21,41 @@ bool Initialize() {
 
 	Create_Img_Texture(map_img_path, BMP);
 
-	Init_Img_Tiles(end_pixel_x, end_pixel_y, margin_pixels, init_pixel_x, init_pixel_y);
+	bool has_collider = true;
+	int tile = 0;
+
+	for (int y = init_pixel_y; y < end_pixel_y; y = y + INI_DATA(tile_size) + margin_pixels) {
+		for (int x = init_pixel_x; x < end_pixel_x; x = x + INI_DATA(tile_size) + margin_pixels) {
+			if (tile == 45 || tile == 46 || tile == 47) {
+				has_collider = false;
+			}
+			else {
+				has_collider = true;
+			}
+			Img_Tile_Def(x, y, INI_DATA(tile_size), INI_DATA(tile_size), has_collider);
+			tile++;
+		}
+	}
 
 	/* ------------------------------------ */
 	/* Initialize and Render the Characters */
 	/* ------------------------------------ */
 
-	characters.blinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, BLINKY_SPRITE);
-	characters.pinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, PINKY_SPRITE);
-	characters.inky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, INKY_SPRITE);
-	characters.clyde_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, GHOST_HITBOX_XOFF, GHOST_HITBOX_XOFF, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, CLYDE_SPRITE);
+	characters.blinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, BLINKY_SPRITE);
+	characters.pinky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, PINKY_SPRITE);
+	characters.inky_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, INKY_SPRITE);
+	characters.clyde_definition = Sprite_Define(&ghost, GHOST_WIDTH, GHOST_SPRITE_HEIGHT, CLYDE_SPRITE);
 
-	characters.pacman_definition = Sprite_Define(&pacman_anim, PACMAN_WIDTH, PACMAN_SPRITE_HEIGHT, PACMAN_HITBOX_XOFF, PACMAN_HITBOX_XOFF, PACMAN_WIDTH, PACMAN_SPRITE_HEIGHT, PACMAN_SPRITE);
+	characters.pacman_definition = Sprite_Define(&pacman_anim, PACMAN_WIDTH, PACMAN_SPRITE_HEIGHT, PACMAN_SPRITE);
 
 	Sprites_Init();
 
-	Sprite_Create_Instance(characters.blinky_definition, 0, 0, 0, 0, 0);
-	Sprite_Create_Instance(characters.pinky_definition, 0, 300, 0, 0, 0);
-	Sprite_Create_Instance(characters.inky_definition, 0, 600, 0, 0, 0);
-	Sprite_Create_Instance(characters.clyde_definition, 0, 900, 0, 0, 0);
+	Sprite_Create_Instance(characters.blinky_definition, 0, 0, 0, 0, 0, GHOST_SPRITE_WIDTH, GHOST_SPRITE_HEIGHT, 0, 0);
+	Sprite_Create_Instance(characters.pinky_definition, 0, 300, 0, 0, 0, GHOST_SPRITE_WIDTH, GHOST_SPRITE_HEIGHT, 0, 0);
+	Sprite_Create_Instance(characters.inky_definition, 0, 600, 0, 0, 0, GHOST_SPRITE_WIDTH, GHOST_SPRITE_HEIGHT, 0, 0);
+	Sprite_Create_Instance(characters.clyde_definition, 0, 900, 0, 0, 0, GHOST_SPRITE_WIDTH, GHOST_SPRITE_HEIGHT, 0, 0);
 
-	int pacman_instance = Sprite_Create_Instance(characters.pacman_definition, 0, GLOBAL_DATA(screenCenter).x, GLOBAL_DATA(screenCenter).y, PACMAN_SPEED, PACMAN_SPEED);
+	int pacman_instance = Sprite_Create_Instance(characters.pacman_definition, 0, GLOBAL_DATA(screenCenter).x, GLOBAL_DATA(screenCenter).y, 0, 0, PACMAN_SPRITE_WIDTH, PACMAN_SPRITE_HEIGHT, PACMAN_SPEED, PACMAN_SPEED);
 
 	Sprite_Draw_Instances();
 
@@ -78,6 +92,11 @@ void Update() {
 	Enable_Actions(0);
 
 	Sprite_Update_Instances();
+
+	/* --------------------------*/
+	/* 		Collision Detection 	 */
+	/* --------------------------*/
+
 
 	SDL_RenderPresent(GLOBAL_DATA(renderer));
 

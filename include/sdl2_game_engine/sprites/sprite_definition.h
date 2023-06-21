@@ -17,30 +17,30 @@ typedef struct {
 
 typedef struct {
 	SDL_Rect dimensions;
-	SDL_Rect hitbox;
 	SDL_Surface *image;
 	SDL_Texture *texture;
 	Sprite_Animation *sprite_animation;
 } Sprite_Definition;
 
 typedef struct {
-	Sprite_Definition *definition;
+	int action;
 	int animation;
-	SDL_Rect position;
 	SDL_bool is_active;
 	SDL_bool is_visible;
+	SDL_Rect position;
 	SDL_Rect srcrect;
-	int action;
+	SDL_Rect hitbox;
 	float xSpeed; // pixels per second
 	float ySpeed; // pixels per second
+	Sprite_Definition *definition;
 } Sprite_Instance;
 
 extern Sprite_Definition sprite_definitions[MAX_SPRITES];
 extern Sprite_Instance sprite_instances[MAX_SPRITES];
 
-size_t Sprite_Define(Sprite_Animation *, int, int, int, int, int, int, const char*);
+size_t Sprite_Define(Sprite_Animation *, int, int, const char*);
 void Sprites_Init();
-size_t Sprite_Create_Instance(int, int, int, int, float, float);
+size_t Sprite_Create_Instance(int, int, int, int, int, int, int, int, float, float);
 void Sprite_Draw_Instances();
 void Sprite_Update_Instances();
 void Sprite_Update_Animation(Sprite_Instance *, int);

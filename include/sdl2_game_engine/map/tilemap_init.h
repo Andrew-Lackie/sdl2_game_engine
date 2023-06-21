@@ -36,6 +36,7 @@ typedef struct {
 typedef struct {
 	Sprite_Definition *sprite;
 	SDL_Rect srcrect;
+	SDL_Rect hitbox;
 	int animation;
 	bool collision_detection;
 } Sprite_Tile;
@@ -63,7 +64,6 @@ void Init_Tile_Def(size_t);
 size_t Blank_Tile_Def(SDL_Color, bool);
 void Create_Img_Texture(char *, int);
 size_t Img_Tile_Def(int, int, int, int, bool);
-size_t Init_Img_Tiles(int, int, int, int, int);
 int **Init_Map_Template(char *);
 SDL_Rect **Init_Tilemap();
 size_t Sprite_Tile_Def(Sprite_Definition *, int, bool);

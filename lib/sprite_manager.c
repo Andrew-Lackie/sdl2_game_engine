@@ -21,6 +21,8 @@ void Action_Define(int player_index, SDL_Scancode key, int anim, int action, Ope
     players[player_index]->actions[action].func = opt;
 }
 
+/* Create another action define function for mouse states and add to enable actions */
+
 void Enable_Actions(int player_index) {
     for (int i = 0; i < players[player_index]->actions_count; i++) {
         if (GLOBAL_DATA(keyboardState)[players[player_index]->actions[i].key]) {

@@ -1,6 +1,6 @@
 #include "../include/sdl2_game_engine/sprites/sprite_definition.h"
 
-size_t Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, int hitbox_yoff, int hitbox_xoff, int hitbox_width, int hitbox_height, const char *url) {
+size_t Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, const char *url) {
 
 	if(definition_count > MAX_SPRITES) return -1;
 
@@ -12,10 +12,6 @@ size_t Sprite_Define(Sprite_Animation *sprite_animation, int width, int height, 
 	sprite_definitions[definition_count].sprite_animation = sprite_animation;
 	sprite_definitions[definition_count].dimensions.w = width;
 	sprite_definitions[definition_count].dimensions.h = height;
-	sprite_definitions[definition_count].hitbox.x = hitbox_xoff;
-	sprite_definitions[definition_count].hitbox.y = hitbox_yoff;
-	sprite_definitions[definition_count].hitbox.w = hitbox_width;
-	sprite_definitions[definition_count].hitbox.h = hitbox_height;
 
 	return definition_count++;
 }
@@ -27,7 +23,9 @@ void Sprites_Init() {
 	}
 }
 
-size_t Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, int y, float xSpeed, float ySpeed) {
+/* World's longest function definition ever but nevermind... */
+
+size_t Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, int y, int hitbox_xoff, int hitbox_yoff, int hitbox_w, int hitbox_h, float xSpeed, float ySpeed) {
 
 	if (instance_count > MAX_SPRITES) return -1;
 
@@ -37,10 +35,17 @@ size_t Sprite_Create_Instance(int sprite_definition, int initial_anim, int x, in
 		sprite_instances[instance_count].animation = initial_anim;
 		sprite_instances[instance_count].action = 0;
 		sprite_instances[instance_count].definition = &sprite_definitions[sprite_definition];
+
 		sprite_instances[instance_count].position.x = x;
 		sprite_instances[instance_count].position.y = y;
 		sprite_instances[instance_count].position.w = sprite_definitions[sprite_definition].dimensions.w * sprite_definitions[sprite_definition].sprite_animation->scale;
 		sprite_instances[instance_count].position.h = sprite_definitions[sprite_definition].dimensions.h * sprite_definitions[sprite_definition].sprite_animation->scale;
+
+		sprite_instances[instance_count].hitbox.x = x + hitbox_xoff;
+		sprite_instances[instance_count].hitbox.y = y + hitbox_yoff;
+		sprite_instances[instance_count].hitbox.w = hitbox_w * sprite_definitions[sprite_definition].sprite_animation->scale;
+		sprite_instances[instance_count].hitbox.h = hitbox_h * sprite_definitions[sprite_definition].sprite_animation->scale;
+
 		sprite_instances[instance_count].xSpeed = xSpeed;
 		sprite_instances[instance_count].ySpeed = ySpeed;
 
