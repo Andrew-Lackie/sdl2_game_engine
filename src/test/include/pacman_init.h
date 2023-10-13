@@ -23,11 +23,40 @@
 int player_count = 0;
 
 typedef struct {
-	int blinky_definition;
-	int pinky_definition;
-	int inky_definition;
-	int clyde_definition;
-	int pacman_definition;
+	struct {
+		struct {
+			int def;
+			int inst;
+		};
+	} blinky;
+
+	struct {
+		struct {
+			int def;
+			int inst;
+		};
+	} pinky;
+
+	struct {
+		struct {
+			int def;
+			int inst;
+		};
+	} inky;
+
+	struct {
+		struct {
+			int def;
+			int inst;
+		};
+	} clyde;
+
+	struct {
+		struct {
+			int def;
+			int inst;
+		};
+	} pacman;
 } Characters;
 
 Characters characters;

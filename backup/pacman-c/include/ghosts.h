@@ -2,7 +2,7 @@
 #define GHOSTS_H
 
 #include "global.h"
-#include "sprite_definition.h"
+#include <sprites/sprite_definition.h>
 
 typedef enum GhostDir {
 	right = 0, down = 1, up = 2, left = 3
