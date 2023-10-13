@@ -1,5 +1,5 @@
-#include "core/engine_config.h"
-#include "sprites/sprite_definition.h"
+#include <core/engine_config.h>
+#include <sprites/sprite_definition.h>
 
 #define MAX_PLAYERS 2
 

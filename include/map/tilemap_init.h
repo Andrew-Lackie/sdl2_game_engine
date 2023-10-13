@@ -1,9 +1,9 @@
 #ifndef TILEMAP_DEFINITION_H
 #define TILEMAP_DEFINITION_H
 
-#include "core/engine_config.h"
-#include "sprites/sprite_definition.h"
-#include "utils/map_parser.h"
+#include <core/engine_config.h>
+#include <sprites/sprite_definition.h>
+#include <utils/map_parser.h>
 
 #define BMP 0
 #define JPG 1

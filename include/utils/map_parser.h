@@ -1,7 +1,7 @@
 #ifndef MAP_PARSER_H
 #define MAP_PARSER_H
 
-#include "core/engine_config.h"
+#include <core/engine_config.h>
 
 typedef struct tile_data tile_data;
 typedef tile_data* tile_p;

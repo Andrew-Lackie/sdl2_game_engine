@@ -1,7 +1,7 @@
 #ifndef SPRITE_DEFINITION_H
 #define SPRITE_DEFINITION_H
 
-#include "core/engine_config.h"
+#include <core/engine_config.h>
 
 #define MAX_SPRITES 50
 
