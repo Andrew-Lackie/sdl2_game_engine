@@ -1,6 +1,10 @@
 BINARY=./bin/bin
-CODEDIRS=./lib
-INCDIRS=. ./include/ghosts/ ./include/sprites/ ./include/core/ ./include/pacman/ # can be list
+ROOT=./src
+LIB=./lib/gengine.a
+CODEDIRS=$(shell find $(ROOT) -type d)
+INCDIRS=. ./include/
+
+TESTINCDIRS=. ./src/test/include/
 
 CC=gcc
 OPT=-O0
@@ -19,14 +23,17 @@ DEPFILES=$(patsubst %.c,%.d,$(CFILES))
 
 
 all: $(BINARY)
-
 $(BINARY): $(OBJECTS)
+	mkdir -p bin
 	$(CC) -o $@ $^ $(LINKFLAGS)
 
 # only want the .c file dependency here, thus $< instead of $^.
 #
 %.o:%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+library:
+	ar -r $(LIB) $(OBJECTS)
 
 clean:
 	rm -rf $(BINARY) $(OBJECTS) $(DEPFILES)
