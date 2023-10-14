@@ -1,14 +1,14 @@
 #ifndef COLLIDER_MANAGER_C
 #define COLLIDER_MANAGER_C
 
-#include <collider/collider_manager.h>
+#include <physics/collider_manager.h>
 
 SDL_bool Hitbox_IsColliding(SDL_Rect hitbox_a, SDL_Rect hitbox_b) {
 
 		return SDL_HasIntersection(&hitbox_a, &hitbox_b);
 }
 
-Vector2D Hitbox_AutoSet(Sprite_Instance *instance, SDL_bool debug, int scale, Uint8 r, Uint8 g, Uint8 b) {
+vector2D Hitbox_AutoSet(Sprite_Instance *instance, SDL_bool debug, int scale, Uint8 r, Uint8 g, Uint8 b) {
 
     SDL_Surface *surface = instance->definition->image;
 
@@ -84,7 +84,7 @@ Vector2D Hitbox_AutoSet(Sprite_Instance *instance, SDL_bool debug, int scale, Ui
 
     /*printf("x_coordinate: %d\n y_coordinate: %d\n", instance->hitbox.x, instance->hitbox.y);*/
 
-    Vector2D vector;
+    vector2D vector;
     vector.x = xmin / (color_channels * scale);
     vector.y = ymin / scale;
     return vector;
